@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sondos Elghobashy</title>
+<meta name="description" content="Sondos Elghobashy — AI Systems & Backend Engineer. Seven years of backend engineering, M.Sc. in Artificial Intelligence, focused on ML security and medical AI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+  /* Layout: single column, max 1120px, dark slate ground; hero + stat rail, then sections separated by hairlines. Deliberately single-theme (Deep Slate is the identity). */
+  :root {
+    --bg: #0F1117;
+    --surface: #171A22;
+    --surface-2: #1D2129;
+    --line: #262B36;
+    --fg: #E6E8EE;
+    --muted: #9AA3B2;
+    --faint: #6B7482;
+    --accent: #4FD1C5;
+    --accent-soft: rgba(79, 209, 197, 0.12);
+    --accent-ink: #0F1117;
+    --display: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
+    --body: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+    color-scheme: dark;
+  }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+  a { color: var(--accent); }
+  a:hover { color: #8AE8DF; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+  p { margin: 0; }
+  ul { margin: 0; padding: 0; list-style: none; }
+
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+
+  /* Header */
+  .site-header {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9;
+    background: rgba(15, 17, 23, 0.86);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-block: 16px; }
+  .brand { font-family: var(--display); font-weight: 700; font-size: 17px; letter-spacing: 0.01em; color: var(--fg); text-decoration: none; }
+  .nav { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 14px; font-weight: 500; }
+  .nav a { color: var(--muted); text-decoration: none; padding: 4px 0; }
+  .nav a:hover { color: var(--fg); }
+
+  /* Hero */
+  .hero { padding-block: 72px 56px; display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 56px; align-items: center; }
+  .eyebrow { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+  .hero h1 { font-size: clamp(36px, 5vw, 58px); line-height: 1.05; letter-spacing: -0.02em; font-weight: 700; margin-top: 18px; }
+  .hero .lead { font-size: 18px; color: var(--muted); max-width: 56ch; margin-top: 20px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 22px; border-radius: 8px; font-weight: 600; font-size: 15px; text-decoration: none; transition: background .15s, border-color .15s; }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); }
+  .btn-primary:hover { background: #8AE8DF; color: var(--accent-ink); }
+  .btn-ghost { border: 1px solid #353A46; color: var(--fg); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--fg); }
+  .stats { display: grid; gap: 12px; min-width: 0; }
+  .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; }
+  .stat .num { font-family: var(--display); font-size: 32px; font-weight: 700; color: var(--accent); line-height: 1.1; }
+  .stat .lbl { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+  /* Sections */
+  .section { border-top: 1px solid var(--line); padding-block: 64px; }
+  .section-head { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; margin-bottom: 32px; }
+  .section-head h2 { font-size: 28px; font-weight: 700; letter-spacing: -0.01em; }
+  .section-head .kicker { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
+  .prose { max-width: 68ch; color: var(--muted); display: grid; gap: 14px; font-size: 17px; }
+  .prose strong { color: var(--fg); font-weight: 600; }
+
+  /* Experience timeline */
+  .timeline { display: grid; gap: 0; }
+  .job { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 24px; padding-block: 26px; border-top: 1px solid var(--line); position: relative; }
+  .job:first-child { border-top: 0; padding-top: 0; }
+  .when { font-family: var(--mono); font-size: 13px; color: var(--faint); padding-top: 4px; }
+  .job h3 { font-size: 19px; font-weight: 700; }
+  .job .org { color: var(--accent); font-weight: 600; font-size: 15px; margin-top: 2px; }
+  .job .meta { color: var(--faint); font-size: 13.5px; }
+  .job ul { margin-top: 12px; display: grid; gap: 7px; color: var(--muted); font-size: 15px; max-width: 72ch; }
+  .job li { padding-left: 16px; position: relative; }
+  .job li::before { content: ""; position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+  /* Projects */
+  .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px 24px; display: flex; flex-direction: column; gap: 10px; min-width: 0; transition: border-color .15s; }
+  .card:hover { border-color: #3A4150; }
+  .card .tag { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+  .card h3 { font-size: 18px; font-weight: 700; }
+  .card p { color: var(--muted); font-size: 15px; }
+  .card .stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 6px; }
+  .chip { font-family: var(--mono); font-size: 12px; padding: 5px 10px; border: 1px solid var(--line); border-radius: 999px; color: #C9CFDA; background: var(--surface-2); }
+
+  /* Skills */
+  .skills { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .skill-group { min-width: 0; border-top: 2px solid var(--accent); padding-top: 14px; }
+  .skill-group h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+  .skill-group .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-group .note { font-size: 12.5px; color: var(--faint); margin-top: 8px; }
+
+  /* Education */
+  .edu { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .edu-item { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px 24px; min-width: 0; }
+  .edu-item .when { padding-top: 0; }
+  .edu-item h3 { font-size: 18px; margin-top: 8px; }
+  .edu-item .org { color: var(--accent); font-weight: 600; font-size: 15px; margin-top: 2px; }
+  .edu-item ul { margin-top: 12px; display: grid; gap: 6px; color: var(--muted); font-size: 14.5px; }
+  .edu-item li { padding-left: 14px; position: relative; }
+  .edu-item li::before { content: ""; position: absolute; left: 0; top: 9px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+
+  /* Honors + footer */
+  .honor { display: flex; gap: 16px; align-items: flex-start; background: var(--accent-soft); border: 1px solid rgba(79, 209, 197, 0.25); border-radius: 12px; padding: 18px 22px; max-width: 640px; }
+  .honor svg { flex: 0 0 auto; margin-top: 2px; }
+  .honor strong { color: var(--fg); }
+  .honor span { color: var(--muted); font-size: 15px; }
+  .site-footer { border-top: 1px solid var(--line); padding-block: 28px 40px; }
+  .site-footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; color: var(--faint); font-size: 13.5px; }
+  .site-footer a { color: var(--muted); text-decoration: none; }
+  .site-footer a:hover { color: var(--fg); }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: minmax(0, 1fr); gap: 36px; padding-block: 52px 44px; }
+    .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .skills { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 640px) {
+    .stats { grid-template-columns: minmax(0, 1fr); }
+    .cards, .edu, .skills { grid-template-columns: minmax(0, 1fr); }
+    .job { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+    .section { padding-block: 48px; }
+  }
+</style>
+<style>
+  html, body { margin: 0; }
+  img { max-width: 100%; }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top">Sondos Elghobashy</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="wrap hero">
+    <div>
+      <div class="eyebrow">AI Systems &amp; Backend Engineer</div>
+      <h1>Building reliable AI systems — from model to production.</h1>
+      <p class="lead">Seven years of backend engineering, now focused on trustworthy machine learning: model security, medical AI, and the infrastructure that keeps it running.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#projects">View work</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/sondos-elghobashy-2a8b1714b">LinkedIn</a>
+      </div>
+    </div>
+    <div class="stats" aria-label="Highlights">
+      <div class="stat"><div class="num">7+ yrs</div><div class="lbl">Backend &amp; full-stack engineering</div></div>
+      <div class="stat"><div class="num">M.Sc. AI</div><div class="lbl">Universität zu Lübeck · ML security focus</div></div>
+      <div class="stat"><div class="num">DFKI</div><div class="lbl">Research platforms at Germany's AI center</div></div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="section-head"><span class="kicker">01</span><h2>About</h2></div>
+      <div class="prose">
+        <p>I'm a software engineer based in Berlin with more than seven years of experience building backend systems, REST APIs and the infrastructure behind them, now completing a Master's in Artificial Intelligence at Universität zu Lübeck.</p>
+        <p>My work sits where engineering meets research: I train and evaluate deep neural networks in PyTorch, and I focus on the <strong>security and trustworthiness of ML systems</strong> — defending models against adversarial manipulation, data poisoning and backdoor attacks — alongside AI governance and the EU AI Act. I'm particularly drawn to medical and safety-critical applications, where a model's reliability matters as much as its accuracy.</p>
+        <p>Most recently I was a software engineer at the German Research Center for Artificial Intelligence (DFKI), building the platforms that research runs on: authentication and access control, data pipelines, admin tooling and an experience-based reasoning agent.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="experience">
+    <div class="wrap">
+      <div class="section-head"><span class="kicker">02</span><h2>Experience</h2></div>
+      <div class="timeline">
+        <article class="job">
+          <div class="when">2023 — 2026</div>
+          <div>
+            <h3>Software Engineer</h3>
+            <div class="org">DFKI — German Research Center for Artificial Intelligence</div>
+            <div class="meta">Berlin, Germany</div>
+            <ul>
+              <li>Designed and implemented the complete authentication and authorization system for the KI-Kompass Inklusiv research platform, including role-based access control and secure session management (Python/Sanic, PostgreSQL, Elasticsearch, React, Docker).</li>
+              <li>Built an admin panel over the Elasticsearch database with role-dependent field exposure and one-click import/export; architected a dedicated user-management database isolated from application data, with automated backups.</li>
+              <li>Co-developed AzuKIt, an experience-based reasoning and planning agent (Prolog, Logtalk) that gives students context-aware hints during training.</li>
+              <li>Refactored and redesigned the project platform in React/Next.js for usability and accessibility; developed Python/Pandas pipelines for cleaning and preprocessing research datasets.</li>
+              <li>Maintained the Studyfinder platform: urgent bug fixes, email services, the database interface layer and dataset export; collaborated with Saarland University on research survey platforms.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="job">
+          <div class="when">2020 — 2023</div>
+          <div>
+            <h3>Back-End Developer</h3>
+            <div class="org">Marmatek</div>
+            <div class="meta">Istanbul, Türkiye</div>
+            <ul>
+              <li>Built serverless APIs on Azure Functions (TypeScript, Node.js, CosmosDB, Mongoose) with OKTA authentication and JOI validation.</li>
+              <li>Built fully automated Azure CI/CD pipelines for containerized applications and a metrics and monitoring system with Python, Prometheus and Grafana.</li>
+              <li>Unit testing with Jest; database seeders for reproducible test data.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="job">
+          <div class="when">2020</div>
+          <div>
+            <h3>Front-End Developer</h3>
+            <div class="org">MGS</div>
+            <div class="meta">Istanbul, Türkiye</div>
+            <ul>
+              <li>Developed a fully responsive frontend with modular, reusable components (Vue.js, Vuex, Vuetify) from design specifications.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="job">
+          <div class="when">2018 — 2020</div>
+          <div>
+            <h3>Back-End Developer &amp; Team Lead</h3>
+            <div class="org">Rocksoft.io</div>
+            <div class="meta">Istanbul, Türkiye</div>
+            <ul>
+              <li>Led an 8-person cross-functional team; mentored junior developers and improved delivery efficiency.</li>
+              <li>Developed and optimized REST APIs for smart-home, appointment-booking and rental platforms, improving performance by 30%; architected cloud infrastructure (Docker, Google Cloud, Firestore) with 99.9% uptime.</li>
+              <li>Built a reusable payment module integrating the Iyzico gateway; automated smart-home systems (Zigbee, Z-Wave, Hass.io), cutting manual operations by 50% and power consumption by 25%.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="job">
+          <div class="when">2017 — 2020</div>
+          <div>
+            <h3>Freelance Full-Stack Engineer</h3>
+            <div class="org">Independent</div>
+            <div class="meta">Istanbul, Türkiye</div>
+            <ul>
+              <li>Delivered REST API backends and responsive web applications (Vue.js, Vuetify) for e-commerce and clinic-system clients; Python web-scraping scripts for automated data analysis.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <div class="wrap">
+      <div class="section-head"><span class="kicker">03</span><h2>Selected projects</h2></div>
+      <div class="cards">
+        <article class="card">
+          <div class="tag">Agents · Symbolic AI</div>
+          <h3>AzuKIt mentor agent</h3>
+          <p>An agent that acts as a mentor for students and trainees, giving context-aware hints when they get stuck. I owned its reasoning and planning: the task is modeled as a search problem with a BFS planner, hints are offered on request, and the system proactively nudges when mistakes become frequent or high-risk. Built in Logtalk for an extensible, object-oriented architecture.</p>
+          <div class="stack"><span class="chip">Prolog</span><span class="chip">Logtalk</span><span class="chip">Planning</span><span class="chip">Python</span></div>
+        </article>
+        <article class="card">
+          <div class="tag">Backend · Security</div>
+          <h3>KI-Kompass Inklusiv platform</h3>
+          <p>A research platform on AI technologies for people with disabilities, used with government ministries as partners. I built the authentication and role-based access system end to end, an admin panel over Elasticsearch with role-dependent field exposure, and a separate user database with automated backups.</p>
+          <div class="stack"><span class="chip">Python</span><span class="chip">PostgreSQL</span><span class="chip">Elasticsearch</span><span class="chip">React</span><span class="chip">Docker</span></div>
+        </article>
+        <article class="card">
+          <div class="tag">ML Security</div>
+          <h3>Secure ML in production</h3>
+          <p>Implemented and evaluated defenses against model manipulation, data poisoning and backdoor injection for models deployed in safety-critical settings — the core of my Master's focus on trustworthy AI.</p>
+          <div class="stack"><span class="chip">PyTorch</span><span class="chip">Adversarial robustness</span><span class="chip">Backdoor defense</span></div>
+        </article>
+        <article class="card">
+          <div class="tag">Medical AI</div>
+          <h3>Medical image classification &amp; segmentation</h3>
+          <p>Designed, trained and evaluated CNN and U-Net models on medical imaging data, using data augmentation, transfer learning and clinically relevant evaluation metrics.</p>
+          <div class="stack"><span class="chip">PyTorch</span><span class="chip">CNN</span><span class="chip">U-Net</span><span class="chip">Transfer learning</span></div>
+        </article>
+        <article class="card">
+          <div class="tag">Platform engineering</div>
+          <h3>Booking, payments &amp; smart home</h3>
+          <p>At Rocksoft: REST APIs for booking and rental platforms with a 30% performance gain and 99.9% uptime, a reusable Iyzico payment module, and smart-home automation over Zigbee and Z-Wave that halved manual operations.</p>
+          <div class="stack"><span class="chip">Node.js</span><span class="chip">Docker</span><span class="chip">Google Cloud</span><span class="chip">Zigbee</span></div>
+        </article>
+        <article class="card">
+          <div class="tag">Senior project</div>
+          <h3>Ambulance-drone emergency app</h3>
+          <p>Drone-based emergency application with live audio/video calls and real-time medical sensor data transmission, improving emergency response time by 40%.</p>
+          <div class="stack"><span class="chip">Real-time</span><span class="chip">Sensors</span><span class="chip">Mobile</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="skills">
+    <div class="wrap">
+      <div class="section-head"><span class="kicker">04</span><h2>Skills</h2></div>
+      <div class="skills">
+        <div class="skill-group">
+          <h3>Machine learning</h3>
+          <div class="chips"><span class="chip">Python</span><span class="chip">PyTorch</span><span class="chip">CNN</span><span class="chip">U-Net</span><span class="chip">GANs</span><span class="chip">Transfer learning</span><span class="chip">Data augmentation</span><span class="chip">Model evaluation</span></div>
+        </div>
+        <div class="skill-group">
+          <h3>Trustworthy &amp; safe AI</h3>
+          <div class="chips"><span class="chip">Adversarial robustness</span><span class="chip">Backdoor defense</span><span class="chip">Data poisoning</span><span class="chip">Explainability</span><span class="chip">Human-Centered AI</span><span class="chip">EU AI Act</span><span class="chip">AI governance</span></div>
+        </div>
+        <div class="skill-group">
+          <h3>Cognitive &amp; agentic AI</h3>
+          <div class="chips"><span class="chip">ACT-R</span><span class="chip">Prolog</span><span class="chip">Logtalk</span><span class="chip">Bayesian networks</span><span class="chip">RAG prototypes</span><span class="chip">LLM APIs</span><span class="chip">Evolutionary algorithms</span></div>
+          <div class="note">RAG and LLM work is hands-on from self-directed projects.</div>
+        </div>
+        <div class="skill-group">
+          <h3>Backend</h3>
+          <div class="chips"><span class="chip">Python / Sanic</span><span class="chip">Node.js</span><span class="chip">TypeScript</span><span class="chip">NestJS</span><span class="chip">Express</span><span class="chip">REST API design</span><span class="chip">PHP</span></div>
+        </div>
+        <div class="skill-group">
+          <h3>Data &amp; infrastructure</h3>
+          <div class="chips"><span class="chip">PostgreSQL</span><span class="chip">MongoDB</span><span class="chip">Elasticsearch</span><span class="chip">CosmosDB</span><span class="chip">Docker</span><span class="chip">CI/CD</span><span class="chip">Prometheus</span><span class="chip">Grafana</span><span class="chip">Azure</span><span class="chip">Google Cloud</span></div>
+        </div>
+        <div class="skill-group">
+          <h3>Frontend &amp; quality</h3>
+          <div class="chips"><span class="chip">React</span><span class="chip">Next.js</span><span class="chip">Vue.js</span><span class="chip">Jest</span><span class="chip">Mocha</span><span class="chip">JOI</span><span class="chip">Git</span><span class="chip">Technical docs</span></div>
+          <div class="note">Languages: Arabic (native), English (professional), German &amp; Turkish (conversational).</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="education">
+    <div class="wrap">
+      <div class="section-head"><span class="kicker">05</span><h2>Education</h2></div>
+      <div class="edu">
+        <article class="edu-item">
+          <div class="when">2025 — expected 2027 · part-time, online</div>
+          <h3>M.Sc. Artificial Intelligence</h3>
+          <div class="org">Universität zu Lübeck</div>
+          <ul>
+            <li>Deep neural networks with PyTorch: model design, training and evaluation on image datasets.</li>
+            <li>Human-Centered AI with a focus on ML security: adversarial manipulation, data poisoning and backdoor attacks.</li>
+            <li>Cognitive systems (ACT-R), ethical AI argumentation, AI governance and EU AI Act compliance.</li>
+            <li>Machine learning, Bayesian networks, time series, ensemble methods, evolutionary robotics, real-time systems.</li>
+          </ul>
+        </article>
+        <article class="edu-item">
+          <div class="when">2013 — 2017</div>
+          <h3>B.Sc. Computer Science and Engineering</h3>
+          <div class="org">Helwan University, Cairo</div>
+          <ul>
+            <li>Senior project: ambulance-drone application with live audio/video and real-time medical sensor data, improving response time by 40%.</li>
+          </ul>
+        </article>
+      </div>
+      <div style="margin-top: 32px">
+        <div class="section-head" style="margin-bottom: 16px"><span class="kicker">Honors</span></div>
+        <div class="honor">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4FD1C5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15.5a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z"/><path d="M8.5 14.5 7 22l5-3 5 3-1.5-7.5"/></svg>
+          <div><strong>Galactic Problem-Solver</strong><br><span>NASA International Space Apps Challenge, Cairo, 2016</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Sondos Elghobashy · Berlin</span>
+    <a href="https://www.linkedin.com/in/sondos-elghobashy-2a8b1714b">LinkedIn</a>
+  </div>
+</footer>
+</body>
+</html>
