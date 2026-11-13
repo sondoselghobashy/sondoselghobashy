@@ -12,7 +12,7 @@ What I care about: production-quality code, honest evaluation, and AI systems th
 * 🌍  Based in Berlin, Germany
 * ✉️  You can contact me at [sondoselghobashy@gmail.com](mailto:sondoselghobashy@gmail.com)
 * 🧠  Currently: GNNs, PyTorch Geometric, ML security, EU AI Act compliance
-* 🔬  M.Sc. Artificial Intelligence — University of Lübeck · Thesis at Fraunhofer ISE
+* 🔬  M.Sc. Artificial Intelligence — University of Lübeck 
 * 🤝  Open to collaborating on meaningful AI and research-software projects
 
 ### Skills
